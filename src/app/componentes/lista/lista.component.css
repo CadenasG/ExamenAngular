@@ -1,0 +1,11 @@
+tr > th, tr > td{
+    width: 200px;
+    padding: 10px;
+    word-wrap: break-word !important;
+}
+
+.ui-g{
+    width: 85%;
+    margin: 10px auto;
+}
+

@@ -1,0 +1,118 @@
+
+<div class="ui-g">
+
+    <p-tabView style="background-color: blue;">
+        <p-tabPanel header="Listado de Usuarios del API">
+            <p-panel header="Lista de Usuarios">
+                <p-table [value]="usuarios" [scrollable]="true"  scrollHeight="30em" scrollDirection="both" >
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>USUARIO</th>
+                            <th>CORREO</th>
+                            <th>CALLE</th>
+                            <th>SUITE</th>
+                            <th>CIUDAD</th>
+                            <th>ZIP-CODE</th>
+                            <th>LATITUD</th>
+                            <th>LOGINTUD</th>
+                            <th>TELEFONO</th>
+                            <th>SITIO WEB</th>
+                            <th>NOMBRE DE COMPAÑÍA</th>
+                            <th>ESLOGAN</th>
+                            <th>NEGOCIO</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-usuario>
+                        <tr>
+                            <td>{{usuario.id}}</td>
+                            <td>{{usuario.name}}</td>
+                            <td>{{usuario.username}}</td>
+                            <td>{{usuario.email}}</td>
+                            <td>{{usuario.address.street}}</td>
+                            <td>{{usuario.address.suite}}</td>
+                            <td>{{usuario.address.city}}</td>
+                            <td>{{usuario.address.zipcode}}</td>
+                            <td>{{usuario.address.geo.lat}}</td>
+                            <td>{{usuario.address.geo.lng}}</td>
+                            <td>{{usuario.phone}}</td>
+                            <td>{{usuario.website}}</td>
+                            <td>{{usuario.company.name}}</td>
+                            <td>{{usuario.company.catchPhrase}}</td>
+                            <td>{{usuario.company.bs}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-panel>
+        </p-tabPanel>
+        <p-tabPanel header="Listado de Usuarios del formulario">
+            <p-panel header="Registro de Usuarios" class="center">
+                <div style="margin-bottom: 20px;">
+                    <p-menubar [model]="menuItems"></p-menubar>
+                </div>
+                <p-table [value]="usuFormulario" [scrollable]="true"  scrollHeight="30em" scrollDirection="both" >
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>EDAD</th>
+                            <th>PROFESION</th>
+                            <th>SEXO</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-usuario>
+                        <tr>
+                            <td>{{usuario.id}}</td>
+                            <td>{{usuario.nombre}}</td>
+                            <td>{{usuario.edad}}</td>
+                            <td>{{usuario.profesion}}</td>
+                            <td>{{usuario.sexo}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-panel>
+        </p-tabPanel>
+    </p-tabView>
+
+    
+    <p-dialog header="Nuevo Usuario" [(visible)]="display" [modal]="true" styleClass="my-style-class">
+        <form [formGroup]="formulario" >
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" placeholder="Coloca tu nombre" formControlName="nombre" (keyup)="validarNombre()">
+                <small *ngIf="valNombre" style="color:red;">
+                    Ingrese nombre válido
+                </small>
+            </div>
+            <div class="form-group">
+                <label>Edad</label>
+                <input type="text" class="form-control" placeholder="Coloca tu edad" formControlName="edad" (keyup)="validarEdad()">
+                <small *ngIf="valEdad" style="color:red;"> 
+                    Ingrese edad válida
+                </small>
+            </div>
+            <div class="form-group">
+                <label>Profesión</label>
+                <input type="text" class="form-control" placeholder="Coloca tu profesión" formControlName="profesion" (keyup)="validarProfesion()">
+                <small *ngIf="valProfesion" style="color:red;">
+                    Profesión no es obligatoria, pero debe ser solo letras
+                </small>
+            </div>
+            <div class="form-group">
+                <label>Sexo</label>
+                <select class="form-control" formControlName="sexo" (change)="validarSexo()">
+                  <option value="">[Seleccione]</option>
+                  <option value="HOMBRE">HOMBRE</option>
+                  <option value="HOMBRE">MUJER</option>
+                </select>
+                <small *ngIf="valSexo" style="color:red;">
+                    Seleccione sexo válido
+                </small>
+            </div>
+            <button (click)="guardar()" class="btn btn-primary">Guardar</button>
+        </form>
+    </p-dialog>
+</div>
+
+ 
